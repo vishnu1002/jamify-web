@@ -33,8 +33,12 @@ export default function MusicPlayerCard() {
         {/* Track Details */}
         <div className="flex flex-col w-full text-left">
           <div className="flex flex-col gap-1">
-            <h3 className="font-spotifyBold text-lg text-foreground/90">Die With A Smile</h3>
-            <p className="text-small text-foreground/80">Lady Gaga, Bruno Mars</p>
+            <h3 className="font-spotifyBold text-lg text-foreground/90">
+              Die With A Smile
+            </h3>
+            <p className="text-small text-foreground/80">
+              Lady Gaga, Bruno Mars
+            </p>
           </div>
         </div>
 
@@ -117,7 +121,6 @@ export default function MusicPlayerCard() {
             onChange={(value) => setVolume(value)}
             size="sm"
           />
-
         </div>
       </CardBody>
     </Card>
