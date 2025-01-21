@@ -5,7 +5,7 @@ import SinglePlayIcon from "../assets/icons/SinglePlayIcon.svg";
 export default function MusicPlayerCard() {
   return (
     <>
-      <div className="flex flex-row gap-2 p-1 items-center bg-stone-700 rounded-md mb-1">
+      <div className="flex flex-row gap-2 p-1 items-center bg-stone-900 rounded-md mb-1">
         <Button
           isIconOnly
           className="data-[hover]:bg-transparent h-10 w-10 ml-1"

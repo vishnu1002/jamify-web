@@ -7,10 +7,10 @@ import ShuffleIcon from "../assets/icons/ShuffleIcon.svg";
 import DownloadIcon from "../assets/icons/DownloadIcon.svg";
 
 export default function MusicPlayerCard() {
-	const [isPlaying, setIsPlaying] = React.useState(false);
+  const [isPlaying, setIsPlaying] = React.useState(false);
   return (
     <>
-      <div className="flex flex-row gap-4 items-center bg-gray-800">
+      <div className="flex flex-row gap-4 items-center">
         <Image
           alt="Album cover"
           className="object-cover rounded-3xl"
@@ -48,23 +48,23 @@ export default function MusicPlayerCard() {
           />
         </Button>
 
-				<Button
-            isIconOnly
-            className="data-[hover]:bg-transparent "
-            radius="full"
-            variant="light"
-          >
-            <img src={ShuffleIcon} alt="ShuffleIcon" className="w-6 h-6" />
-          </Button>
+        <Button
+          isIconOnly
+          className="data-[hover]:bg-transparent "
+          radius="full"
+          variant="light"
+        >
+          <img src={ShuffleIcon} alt="ShuffleIcon" className="w-6 h-6" />
+        </Button>
 
-					<Button
-            isIconOnly
-            className="data-[hover]:bg-transparent "
-            radius="full"
-            variant="light"
-          >
-            <img src={DownloadIcon} alt="DownloadIcon" className="w-6 h-6" />
-          </Button>
+        <Button
+          isIconOnly
+          className="data-[hover]:bg-transparent "
+          radius="full"
+          variant="light"
+        >
+          <img src={DownloadIcon} alt="DownloadIcon" className="w-6 h-6" />
+        </Button>
       </div>
     </>
   );

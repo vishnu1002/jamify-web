@@ -59,12 +59,13 @@ const NavbarComponent = () => {
               <Avatar
                 isBordered
                 as="button"
-                className="transition-transform"
+                className="transition-transform bg-background"
                 color="default"
                 size="md"
-                icon={<img src={PartyIcon} alt="Party Icon" className="w-6 h-6" />}
-              >
-              </Avatar>
+                icon={
+                  <img src={PartyIcon} alt="Party Icon" className="w-6 h-6" />
+                }
+              ></Avatar>
             </DropdownTrigger>
             <DropdownMenu aria-label="Party Members" variant="flat">
               <DropdownItem key="logout" color="danger">
@@ -79,16 +80,16 @@ const NavbarComponent = () => {
               <Avatar
                 isBordered
                 as="button"
-                className="transition-transform"
+                className="transition-transform bg-background"
                 color="default"
                 size="md"
-                icon={<img src={ProfileIcon} alt="Party Icon" className="w-6 h-6" />}
+                icon={
+                  <img src={ProfileIcon} alt="Party Icon" className="w-6 h-6" />
+                }
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile=name">
-                punisher
-              </DropdownItem>
+              <DropdownItem key="profile=name">punisher</DropdownItem>
               <DropdownItem key="end-party" color="danger">
                 End Party
               </DropdownItem>
