@@ -19,9 +19,11 @@ export default function MusicPlayerCard() {
           src="./src/assets/playlist-cover.jpg"
         />
         <div className="flex flex-col gap-2">
-          <p className="text-sm font-googleRegular">Playlist</p>
-          <p className="text-3xl font-spotifyBold">Retrowave // Outrun</p>
-          <p className="text-sm font-googleRegular">150 Songs</p>
+          <p className="text-sm font-googleRegular text-textSub">Playlist</p>
+          <p className="text-3xl font-spotifyBold text-textMain">
+            Retrowave // Outrun
+          </p>
+          <p className="text-sm font-googleRegular text-textSub">150 Songs</p>
           <Button
             isIconOnly
             className="data-[hover]:bg-transparent "

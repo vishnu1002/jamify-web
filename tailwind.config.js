@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const {heroui} = require("@heroui/react");
+const { heroui } = require("@heroui/react");
 export default {
   content: [
     "./index.html",
@@ -8,6 +8,12 @@ export default {
   ],
   theme: {
     extend: {
+      colors: {
+        primaryApp: "#c8ff88",
+        backgroundDark: "#000000",
+        textMain: "#e5e7eb",
+        textSub: "#afafaf",
+      },
       fontFamily: {
         googleRegular: ["GoogleSans-Regular", "sans-serif"],
         spotifyBold: ["SpotifyMix-Bold", "sans-serif"],
@@ -17,5 +23,4 @@ export default {
   },
   darkMode: "class",
   plugins: [heroui()],
-}
-
+};

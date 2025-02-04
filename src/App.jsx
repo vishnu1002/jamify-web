@@ -47,20 +47,20 @@ export default function App() {
           <div
             className={`${
               isMobile ? "hidden" : "block"
-            } w-[50%] bg-background p-4 border-r border-divider overflow-y-auto`}
+            } w-[50%] bg-backgroundDark p-4 border-r border-divider overflow-y-auto`}
           >
             <MusicPlayerCard />
           </div>
-
           {/* Right Column (50%) - Full Width on Mobile */}
           <div
             className={`${
               isMobile ? "w-full" : "w-[50%]"
-            } bg-background p-4 overflow-y-auto`}
+            } bg-backgroundDark p-4 flex flex-col h-full`}
           >
-            <div className="h-auto">
-              <PlaylistHeader />
-              {/* Render PlaylistTracks and attach click handler */}
+            <PlaylistHeader />
+
+            {/* Scrollable PlaylistTracks */}
+            <div className="overflow-y-auto flex-grow max-h-[calc(100vh-200px)]">
               {[...Array(10)].map((_, index) => (
                 <div key={index} onClick={handleSongClick}>
                   <PlaylistTracks />
