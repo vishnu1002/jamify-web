@@ -25,7 +25,7 @@ const NavbarComponent = () => {
       <NavbarContent justify="normal">
         <NavbarBrand>
           <img src={LogoIcon} alt="Search" className="w-5 h-5" />
-          <p className="ml-3 hidden sm:block font-bold text-inherit">Jamify</p>
+          <p className="ml-3 hidden sm:block font-bold text-textMain">Jamify</p>
         </NavbarBrand>
       </NavbarContent>
 
@@ -54,7 +54,7 @@ const NavbarComponent = () => {
       <NavbarContent justify="normal">
         <NavbarItem className="flex items-center space-x-4">
           {/* Party Icons */}
-          <Dropdown placement="bottom-end">
+          <Dropdown placement="bottom-end" className="bg-neutral-900">
             <DropdownTrigger>
               <Avatar
                 isBordered
@@ -68,14 +68,14 @@ const NavbarComponent = () => {
               ></Avatar>
             </DropdownTrigger>
             <DropdownMenu aria-label="Party Members" variant="flat">
-              <DropdownItem key="logout" color="danger">
+              <DropdownItem key="logout" color="danger" className="text-danger">
                 Log Out
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
 
           {/* Profile Icons */}
-          <Dropdown placement="bottom-end">
+          <Dropdown placement="bottom-end" className="bg-neutral-900">
             <DropdownTrigger>
               <Avatar
                 isBordered
@@ -89,8 +89,14 @@ const NavbarComponent = () => {
               />
             </DropdownTrigger>
             <DropdownMenu aria-label="Profile Actions" variant="flat">
-              <DropdownItem key="profile=name">punisher</DropdownItem>
-              <DropdownItem key="end-party" color="danger">
+              <DropdownItem key="profile=name" className="text-textSub">
+                punisher
+              </DropdownItem>
+              <DropdownItem
+                key="end-party"
+                color="danger"
+                className="text-danger"
+              >
                 End Party
               </DropdownItem>
             </DropdownMenu>

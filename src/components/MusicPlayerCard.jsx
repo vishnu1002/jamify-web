@@ -45,12 +45,10 @@ export default function MusicPlayerCard() {
           {/* Track Details */}
           <div className="flex flex-col w-full text-left">
             <div className="flex flex-col gap-1">
-              <h3 className="font-spotifyBold text-lg text-foreground/90">
+              <h3 className="font-spotifyBold text-lg text-textMain">
                 Die With A Smile
               </h3>
-              <p className="text-small text-foreground/80">
-                Lady Gaga, Bruno Mars
-              </p>
+              <p className="text-small text-textSub">Lady Gaga, Bruno Mars</p>
             </div>
           </div>
 
@@ -67,8 +65,8 @@ export default function MusicPlayerCard() {
               size="sm"
             />
             <div className="flex justify-between">
-              <p className="text-small">1:23</p>
-              <p className="text-small text-foreground/50">4:32</p>
+              <p className="text-small text-textSub">1:23</p>
+              <p className="text-small text-textSub">4:32</p>
             </div>
           </div>
 
@@ -120,19 +118,9 @@ export default function MusicPlayerCard() {
               <img src={LoopIcon} alt="Loop" className="w-5 h-5" />
             </Button>
           </div>
-
-          {/* Volume Slider */}
           <div className="flex items-center gap-2">
-            <img src={VolumeIcon} alt="Volume" className="w-5 h-5" />
-            <Slider
-              aria-label="Volume"
-              className="w-[150px]"
-              hideThumb={true}
-              color="foreground"
-              value={volume}
-              onChange={(value) => setVolume(value)}
-              size="sm"
-            />
+            <img src={VolumeIcon} alt="Volume" />
+            <p className="text-textSub">Punisher's Party</p>
           </div>
         </CardBody>
       </Card>

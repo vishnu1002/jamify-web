@@ -5,7 +5,7 @@ import SinglePlayIcon from "../assets/icons/SinglePlayIcon.svg";
 export default function MusicPlayerCard() {
   return (
     <>
-      <div className="flex flex-row gap-2 p-1 items-center bg-stone-900 rounded-md mb-1">
+      <div className="flex flex-row gap-2 p-1 items-center rounded-md mb-1">
         <Button
           isIconOnly
           className="data-[hover]:bg-transparent h-10 w-10 ml-1"
@@ -23,11 +23,15 @@ export default function MusicPlayerCard() {
         />
 
         <div className="flex flex-col">
-          <p className="text-md font-googleRegular">Die With A Smile</p>
-          <p className="text-sm font-googleRegular">Lady Gaga, Bruno Mars</p>
+          <p className="text-md font-googleRegular text-textMain">
+            Die With A Smile
+          </p>
+          <p className="text-sm font-googleRegular text-textSub">
+            Lady Gaga, Bruno Mars
+          </p>
         </div>
         <div className="flex flex-row ml-auto">
-          <p className="text-sm mr-3">4:32</p>
+          <p className="text-sm mr-3 text-textSub">4:32</p>
           <Button
             isIconOnly
             className="data-[hover]:bg-transparent h-5 w-5 mr-3"
