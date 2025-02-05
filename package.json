@@ -1,7 +1,12 @@
 {
-  "name": "jamify-dev",
+  "name": "jamify-web",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "jamify frontend web interface",
+  "author": {
+    "name": "vishnu1002",
+    "url": "https://github.com/vishnu1002"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

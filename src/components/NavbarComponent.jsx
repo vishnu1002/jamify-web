@@ -1,5 +1,5 @@
 // NavbarComponent.js
-import React from "react";
+import React, { useState } from "react";
 import {
   Navbar,
   NavbarBrand,
@@ -17,8 +17,32 @@ import LogoIcon from "../assets/icons/LogoIcon.svg";
 import ProfileIcon from "../assets/icons/ProfileIcon.svg";
 import PartyIcon from "../assets/icons/PartyIcon.svg";
 import SearchIcon from "../assets/icons/SearchIcon.svg";
+import { fetchSpotifyData } from "../utils/api";
 
 const NavbarComponent = () => {
+  const [inputUrl, setInputUrl] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleUrlSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!inputUrl.trim()) return;
+
+    try {
+      setIsLoading(true);
+      const data = await fetchSpotifyData(inputUrl);
+      console.log('Received data:', data); // Handle the response data as needed
+      
+      // Clear input after successful submission
+      setInputUrl("");
+    } catch (error) {
+      // Handle error (you might want to show an error message to the user)
+      console.error('Failed to fetch data:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <Navbar isBordered maxWidth="full">
       {/* Brand Logo and Party Name */}
@@ -31,22 +55,31 @@ const NavbarComponent = () => {
 
       {/* Search Bar and Profile Dropdown */}
       <NavbarContent justify="center" className="flex-grow">
-        {/* Search Bar */}
         <NavbarItem className="w-full max-w-2xl">
-          <Input
-            classNames={{
-              base: "h-12 w-full", // Ensure full width within the container
-              input: "text-small",
-              inputWrapper:
-                "h-full font-normal text-default-500 dark:bg-default-100/30 border-1 border-gray-800 rounded-2xl w-full", // Ensure full width
-            }}
-            placeholder="Spotify track or playlist url"
-            size="sm"
-            startContent={
-              <img src={SearchIcon} alt="Search" className="mr-3 w-5 h-5" />
-            }
-            type="search"
-          />
+          <form onSubmit={handleUrlSubmit} className="w-full">
+            <Input
+              classNames={{
+                base: "h-12 w-full",
+                input: "text-small",
+                inputWrapper:
+                  "h-full font-normal text-default-500 dark:bg-default-100/30 border-1 border-gray-800 rounded-2xl w-full",
+              }}
+              placeholder="Spotify track or playlist url"
+              size="sm"
+              startContent={
+                <img src={SearchIcon} alt="Search" className="mr-3 w-5 h-5" />
+              }
+              type="url"
+              value={inputUrl}
+              onChange={(e) => setInputUrl(e.target.value)}
+              disabled={isLoading}
+              endContent={
+                isLoading && (
+                  <div className="animate-spin rounded-full h-5 w-5 border-2 border-primary border-t-transparent" />
+                )
+              }
+            />
+          </form>
         </NavbarItem>
       </NavbarContent>
 
