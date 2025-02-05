@@ -19,7 +19,7 @@ import PartyIcon from "../assets/icons/PartyIcon.svg";
 import SearchIcon from "../assets/icons/SearchIcon.svg";
 import { fetchSpotifyData } from "../utils/api";
 
-const NavbarComponent = () => {
+const NavbarComponent = ({ onMetadataUpdate }) => {
   const [inputUrl, setInputUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -31,12 +31,9 @@ const NavbarComponent = () => {
     try {
       setIsLoading(true);
       const data = await fetchSpotifyData(inputUrl);
-      console.log('Received data:', data); // Handle the response data as needed
-      
-      // Clear input after successful submission
+      onMetadataUpdate(data);
       setInputUrl("");
     } catch (error) {
-      // Handle error (you might want to show an error message to the user)
       console.error('Failed to fetch data:', error);
     } finally {
       setIsLoading(false);

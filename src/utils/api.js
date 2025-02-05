@@ -11,4 +11,17 @@ export const fetchSpotifyData = async (spotifyUrl) => {
     console.error('Error fetching Spotify data:', error);
     throw error;
   }
+};
+
+export const fetchStreamUrl = async (videoId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/api/stream?videoId=${videoId}`);
+    if (!response.ok) throw new Error('Failed to fetch stream URL');
+    
+    const data = await response.json();
+    return data.audioUrl;
+  } catch (error) {
+    console.error('Error fetching stream URL:', error);
+    throw error;
+  }
 }; 

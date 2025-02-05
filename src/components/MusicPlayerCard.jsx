@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import { Card, CardBody, Image, Button, Slider } from "@heroui/react";
 import PlayIcon from "../assets/icons/PlayIcon.svg";
 import PauseIcon from "../assets/icons/PauseIcon.svg";
@@ -8,37 +8,73 @@ import LoopIcon from "../assets/icons/LoopIcon.svg";
 import ShuffleIcon from "../assets/icons/ShuffleIcon.svg";
 import VolumeIcon from "../assets/icons/VolumeIcon.svg";
 
-export default function MusicPlayerCard() {
+const defaultTrack = {
+  title: "Die With A Smile",
+  artist: "Lady Gaga, Bruno Mars",
+  duration: "4:32",
+  image: "./src/assets/album-cover.jpg"
+};
+
+export default function MusicPlayerCard({ 
+  currentTrack = defaultTrack,
+  isPlaying,
+  currentTime,
+  duration,
+  isLooping,
+  onPlayPause,
+  onTimeUpdate,
+  onLoopToggle,
+  onDragStart,
+  onDragEnd
+}) {
   const [volume, setVolume] = React.useState(90);
-  const [isPlaying, setIsPlaying] = React.useState(false);
+  const audioRef = useRef(null);
+  const track = currentTrack || defaultTrack;
+
+  // Get duration from track
+  const getDuration = (track) => {
+    if (track.duration) return track.duration;
+    if (track.youtubeResults?.duration) return track.youtubeResults.duration;
+    return defaultTrack.duration;
+  };
+
+  // Format time in seconds to MM:SS
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = Math.floor(time % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+  };
+
+  // Handle slider change
+  const handleSliderChange = (value) => {
+    const newTime = (value / 100) * duration;
+    onTimeUpdate(newTime);
+  };
 
   return (
     <div className="relative h-full w-full flex justify-center items-center">
       {/* Blurred Background */}
       <div
-        className="absolute w-[70%] h-[70%] bg-cover bg-center blur-3xl z-0"
+        className="absolute w-[80%] h-[80%] bg-cover bg-center blur-2xl z-0"
         style={{
-          backgroundImage: `url('./src/assets/album-cover.jpg')`,
-          left: "50%", // Horizontally center
-          transform: "translateX(-50%)", // Adjust for exact centering
-          top: "2%", // Custom vertical position (adjust as needed)
+          backgroundImage: `url('${track.image}')`,
+          left: "50%",
+          transform: "translateX(-50%)",
+          top: "5%",
         }}
       />
 
       {/* Music Player Card */}
-      <Card
-        className="border-none bg-transparent max-w-[380px] mx-auto z-10" // Semi-transparent background
-        shadow="none"
-      >
-        <CardBody className="flex flex-col gap-4 items-center">
+      <div className="border-none bg-transparent max-w-auto mx-auto z-10">
+        <div className="flex flex-col gap-3 items-center p-3 bg-transparent">
           {/* Big Music Cover Art */}
-          <div className="flex justify-center z-20">
+          <div className="flex justify-center z-20 bg">
             <Image
-              alt="Album cover"
+              alt={track.title}
               className="object-cover rounded-3xl"
-              height={350}
-              width={350}
-              src="./src/assets/album-cover.jpg"
+              height={470}
+              width={470}
+              src={track.image}
             />
           </div>
 
@@ -46,9 +82,9 @@ export default function MusicPlayerCard() {
           <div className="flex flex-col w-full text-left">
             <div className="flex flex-col gap-1">
               <h3 className="font-spotifyBold text-lg text-textMain">
-                Die With A Smile
+                {track.title}
               </h3>
-              <p className="text-small text-textSub">Lady Gaga, Bruno Mars</p>
+              <p className="text-small text-textSub">{track.artist}</p>
             </div>
           </div>
 
@@ -57,16 +93,19 @@ export default function MusicPlayerCard() {
             <Slider
               aria-label="Music progress"
               classNames={{
-                track: "bg-default-200",
-                thumb: " h-3 after:w-2 after:h-2 after:bg-foreground",
+                track: "bg-neutral-900",
+                thumb: "h-3 after:w-2 after:h-2 after:bg-foreground",
               }}
               color="foreground"
-              defaultValue={30}
+              value={(currentTime / duration) * 100 || 0}
+              onChange={handleSliderChange}
+              onChangeStart={onDragStart}
+              onChangeEnd={onDragEnd}
               size="sm"
             />
             <div className="flex justify-between">
-              <p className="text-small text-textSub">1:23</p>
-              <p className="text-small text-textSub">4:32</p>
+              <p className="text-small text-textSub">{formatTime(currentTime)}</p>
+              <p className="text-small text-textSub">{getDuration(track)}</p>
             </div>
           </div>
 
@@ -93,7 +132,7 @@ export default function MusicPlayerCard() {
               className="w-11 h-11 bg-white data-[hover]:bg-foreground/90"
               radius="full"
               variant="light"
-              onPress={() => setIsPlaying((prev) => !prev)}
+              onPress={onPlayPause}
             >
               <img
                 src={isPlaying ? PauseIcon : PlayIcon}
@@ -111,19 +150,28 @@ export default function MusicPlayerCard() {
             </Button>
             <Button
               isIconOnly
-              className="data-[hover]:bg-transparent"
+              className={`data-[hover]:bg-transparent ${
+                isLooping 
+                  ? 'border-2 border-textSub' 
+                  : 'border-2 border-transparent'
+              }`}
               radius="full"
               variant="light"
+              onPress={onLoopToggle}
             >
-              <img src={LoopIcon} alt="Loop" className="w-5 h-5" />
+              <img 
+                src={LoopIcon} 
+                alt="Loop" 
+                className={`w-5 h-5 ${isLooping ? 'opacity-100' : 'opacity-100'}`}
+              />
             </Button>
           </div>
           <div className="flex items-center gap-2">
             <img src={VolumeIcon} alt="Volume" />
             <p className="text-textSub">Punisher's Party</p>
           </div>
-        </CardBody>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
